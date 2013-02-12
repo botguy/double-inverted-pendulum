@@ -6,12 +6,12 @@
 #include "Arduino.h"
 
 #define   a1    8
-#define   a2    9
-#define   aPWM  10
+#define   a2    11
+#define   aPWM  9
 
 #define   b1    12
 #define   b2    13
-#define   bPWM  11
+#define   bPWM  10
 
 void DualMotorInit(void);
 
