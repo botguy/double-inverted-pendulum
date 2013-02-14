@@ -2,7 +2,7 @@ clc
 clear all
 syms x theta phi xD thetaD phiD real % coordinates
 syms r l11 l1t l0 l2 real % physical dimensions
-syms m1 m2 J1 J2 tau g real % physical parameters
+syms m1 m2 mw J1 J2 Jw tau g real % physical parameters
 
 q  = [x, theta, phi]';
 qD = [xD, thetaD, phiD]';
@@ -36,14 +36,15 @@ rm2Dsq = rm2D' * rm2D;
 % Kinetic and Potential Energy
 T = (1/2) * (   m1*rwDsq + J1*(thetaD^2) ...
             +   m2*rpDsq + J2*((thetaD + phiD)^2) ...
+            +   mw*rwDsq + Jw*(rwDsq/(r^2)) ...
             );
 
 V = g*(m1*rm1'*ey + m1*rm2'*ey);
 
 % Lagrangian mechanics
 Mqd = jacobian(T,qD);
-M = simplify( jacobian(Mqd ,qD));
-Mdqd = simplify( jacobian(Mqd,q)*qD);
+M = simplify( jacobian(Mqd ,qD)); % mass matrix
+Mdqd = simplify( jacobian(Mqd,q)*qD); %constraint forces
 dTdq = simplify(jacobian(T,q)');
 dVdq = simplify(jacobian(V,q)');
 qdd = simplify(inv(M)*([1/r; 1; 0]*tau -Mdqd + dTdq - dVdq))
