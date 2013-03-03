@@ -1,26 +1,37 @@
 #include <SoftwareSerial.h>   //Software Serial Port
-#define RxD 0
-#define TxD 1
+#define RxD 6
+#define TxD 7
  
 #define DEBUG_ENABLED  1
  
 SoftwareSerial blueToothSerial(RxD,TxD);
+String testString = "";
  
 void setup() 
 { 
   Serial.begin(9600);
   pinMode(RxD, INPUT);
   pinMode(TxD, OUTPUT);
+  pinMode(A0, INPUT);
+  pinMode(13, OUTPUT);
   setupBlueToothConnection();
- 
+  
+  // initialize bluetooth
+  while(!blueToothSerial.available()); // wait for avaliable
+  (void) blueToothSerial.read();
+  
 } 
  
 void loop() 
 { 
   char recvChar;
   while(1){
+    testString = "";
+    blueToothSerial.println(analogRead(A0)); 
     if(blueToothSerial.available()){//check if there's any data sent from the remote bluetooth shield
       recvChar = blueToothSerial.read();
+      testString.concat(recvChar);
+      //if(testString = "")
       Serial.print(recvChar);
     }
     if(Serial.available()){//check if there's any data sent from the local serial terminal, you can add the other applications here
