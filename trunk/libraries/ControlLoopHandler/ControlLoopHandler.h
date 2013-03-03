@@ -3,8 +3,6 @@
 
 #include <ControlLoop.h>
 
-#define SPEW_DATA_TO_TERMNAL 0
-
 #define BOTTOM_POT_PIN	0
 #define TOP_POT_PIN		1
 

@@ -2,6 +2,7 @@
 #include <ControlLoopHandler.h>
 #include <ControlLoop.h>
 #include <DualMotorCtlr.h>
+#include <DataLog.h>
 
 static void setupTimer2(void);
 
@@ -63,10 +64,11 @@ ISR(TIMER2_COMPA_vect)
 	// Prepare for next sample
 	cLoop->preSample();
 	
-	// spew sample data
-#if SPEW_DATA_TO_TERMNAL
-	
-#endif // SPEW_DATA_TO_TERMNAL
+	// log data
+	logData((int16_t) micros);
+	logData(bottomAngle);
+	logData(topAngle);
+	logData(control);
 }
 
 void EmergencyStop(void)
