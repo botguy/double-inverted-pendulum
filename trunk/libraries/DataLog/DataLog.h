@@ -13,6 +13,10 @@
 void startDataLogging(void);
 void stopDataLogging(uint16_t numInterrupts);
 void logData(int16_t data);
-void printDataLog(void);
+
+// Data can be outputted to USB serial or bluetooth
+// printDataLog( &Serial ); // USB
+// printDataLog( &blueToothSerial ); // bluetooth
+void printDataLog(Stream* outStream);
 
 #endif // DataLog_h
