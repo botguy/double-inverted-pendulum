@@ -38,25 +38,25 @@ void logData(int16_t data)
 	}
 }
 
-void printDataLog(void)
+void printDataLog(Stream* outStream)
 {
 	uint16_t j = index;
 	uint8_t k = 0;
 	
 	do
 	{
-		Serial.print(buffer[j]);
+		outStream->print(buffer[j]);
 		
 		// current data item in line
 		k++;
 		if(k >= NUM_RECORDED_SIGNALS)
 		{
-			Serial.print("\n");
+			outStream->print("\n");
 			k = 0;
 		}
 		else
 		{
-			Serial.print("\t");
+			outStream->print("\t");
 		}
 	
 		//current index in buffer
