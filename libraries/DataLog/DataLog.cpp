@@ -38,7 +38,6 @@ void logData(int16_t data)
 	}
 }
 
-#define NUM_DATA_ITEMS	4	
 void printDataLog(void)
 {
 	uint16_t j = index;
@@ -50,7 +49,7 @@ void printDataLog(void)
 		
 		// current data item in line
 		k++;
-		if(k >= NUM_DATA_ITEMS)
+		if(k >= NUM_RECORDED_SIGNALS)
 		{
 			Serial.print("\n");
 			k = 0;
