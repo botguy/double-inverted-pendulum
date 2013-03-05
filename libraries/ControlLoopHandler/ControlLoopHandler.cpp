@@ -24,9 +24,10 @@ void SetControlLoop(ControlLoop* ctrlLoop)
 }
 
 // Target sampling rate: 500Hz
-// Clock prescaler set to 256 -> 62.5kHz timer2 clock based on 16Mhz system clock
-// interrupt triggers every 125 counts to produce 500Hz interrupt.
-// interrupt register set to 124 since it starts from zero.
+// Clock prescaler set to 128 -> 62.5kHz timer2 clock based on 16Mhz system clock
+// For 128 prescaler, set CS22:CS20 = 101 according to table 18-9 in Atmel ATmega328p datasheet
+// interrupt triggers every 250 counts to produce 500Hz interrupt.
+// interrupt register set to 249 since it starts from zero.
 static void setupTimer2(void)
 {
 	//set timer2 interrupt at 62.5kHz
@@ -35,11 +36,11 @@ static void setupTimer2(void)
 	TCNT2  = 0;//initialize counter value to 0
 	
 	// set compare match register for 500Hz
-	OCR2A = 124;// = ((16e6) / (500*256)) - 1 //(must be <256)
+	OCR2A = 249;// = ((16e6) / (500*128)) - 1 //(must be <256)
 	// turn on CTC mode
 	TCCR2A |= (1 << WGM21);
 	// Set CS12 bit for 256 prescaler
-	TCCR2B |= (1 << CS12);   
+	TCCR2B |= ((1 << CS22) | (1 << CS20));
 	// enable timer compare interrupt
 	TIMSK2 |= (1 << OCIE2A);
 }
@@ -65,7 +66,7 @@ ISR(TIMER2_COMPA_vect)
 	cLoop->preSample();
 	
 	// log data
-	logData((int16_t) micros);
+	logData((int16_t) micros());
 	logData(bottomAngle);
 	logData(topAngle);
 	logData(control);
