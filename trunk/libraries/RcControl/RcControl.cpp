@@ -40,6 +40,8 @@ void RcControl( Stream* stream )
 				break;
 			
 			case UPLOAD_TUNING:
+				Serial.println("rccontrol parsing");
+				parseTuning( stream );
 				break;
 				
 			default:

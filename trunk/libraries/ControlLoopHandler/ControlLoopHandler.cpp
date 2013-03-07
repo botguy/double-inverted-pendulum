@@ -95,4 +95,9 @@ void setTurn(int16_t newTurn)
 	interrupts(); //turn on interrupts
 }
 
-
+void parseTuning( Stream* stream )
+{
+	Serial.println("handler parsing");
+	
+	cLoop->parseTuning( stream );
+}

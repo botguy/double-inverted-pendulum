@@ -20,6 +20,7 @@ void SetControlLoop(ControlLoop* cLoop);
 //Written from the background task. Can be used for RC control or higher level actions.
 void setSped(int16_t sped);
 void setTurn(int16_t turn);
+void parseTuning( Stream* steam);
 
 void EmergencyStop(void);
 
