@@ -34,12 +34,11 @@ rm1Dsq = rm1D' * rm1D;
 rm2Dsq = rm2D' * rm2D;
 
 % Kinetic and Potential Energy
-T = (1/2) * (   m1*rwDsq + J1*(thetaD^2) ...
-            +   m2*rpDsq + J2*((thetaD + phiD)^2) ...
-            +   mw*rwDsq + Jw*(rwDsq/(r^2)) ...
-            );
+T = (1/2) * (  mw*rwDsq + Jw*(xD^2/(r^2)) ...
+            +  m1*rm1Dsq + J1*(thetaD^2) ...
+            +  m2*rm2Dsq + J2*((thetaD + phiD)^2));
 
-V = g*(m1*rm1'*ey + m1*rm2'*ey);
+V = g*(m1*rm1'*ey + m2*rm2'*ey);
 
 % Lagrangian mechanics
 Mqd = jacobian(T,qD);
@@ -50,8 +49,8 @@ dVdq = simplify(jacobian(V,q)');
 qdd = simplify(inv(M)*([1/r; 1; 0]*tau -Mdqd + dTdq - dVdq));
 
 % Define state vectors and matrices
-x = [q(1)  q(2) q(3) qD(1) qD(2) qD(3)]';
-xd = [qD(1) qD(2) qD(3) qdd(1) qdd(2) qdd(3)]';
+x = [x  theta phi xD thetaD phiD]';
+xd = [xD thetaD phiD qdd(1) qdd(2) qdd(3)]';
 Asymb = jacobian(xd,x);
 Bsymb = jacobian(xd,tau);
 
@@ -70,20 +69,20 @@ l0 = 1;
 l2 = 1;
 m1 = .1;
 m2 = .1;
-mw = .1;
-r = (58e-3)/2;
+mw = 1;
+r = .1;
 J1 = m1*l0^2; %Fix
 J2 = m2*l2^2; %Fix
 Jw = mw*r^2/2;
-tau = 10;
+tau = 20;
 
 % Substitute values into the matrices
 A = double(subs(Asymb))
 B = double(subs(Bsymb))
-ctrb(A,B)
-rank(ctrb(A,B))
+c=ctrb(A,B)
+rank(c)
 
-Q = eye(6);
+Q = 5*eye(6);
 R = 1;
 
 % Solve the LQR problem
