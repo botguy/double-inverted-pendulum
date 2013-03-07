@@ -1,12 +1,12 @@
 #include "Arduino.h"
 #include <ControlLoop.h>
-
+/*
 //constructor
 ControlLoop::ControlLoop(void)
 {
 
 }
-
+*/
 // preSample: called during the previous sample, after control output is finished, to prepare for next sample
 void ControlLoop::preSample(void)
 {
@@ -17,4 +17,9 @@ void ControlLoop::preSample(void)
 int16_t ControlLoop::postSample(int16_t bottomAngle, int16_t topAngle)
 {
 	return 0;
+}
+
+void ControlLoop::parseTuning( Stream* stream )
+{
+ Serial.println("ControlLoop parsing");
 }
