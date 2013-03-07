@@ -43,6 +43,8 @@ void printDataLog(Stream* outStream)
 	uint16_t j = index;
 	uint8_t k = 0;
 	
+	stopDataLogging(0);
+	
 	do
 	{
 		outStream->print(buffer[j]);
