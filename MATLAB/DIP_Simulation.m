@@ -5,8 +5,8 @@ l11 = .5;
 l1t = 0;
 l0 = 1;
 l2 = 1;
-m1 = .25;
-m2 = .25;
+m1 = .1;
+m2 = .1;
 mw = .5;
 r = (58e-3)/2;
 J1 = m1*r^2/2;
@@ -44,7 +44,7 @@ for i=1:length(Y)
     plot(pts(1,:)',pts(2,:)','LineWidth',5,'Color',[.8 0 0]); % two red pendulums
     plot(pts(1,:)',pts(2,:)','yo','LineWidth',1); % yellow circles
     plot([-5 5]',[0 0]','LineWidth',3,'Color',[0 0 .8]); % blue ground
-    pause(.1);
+    pause(2);
 end
 
 function ydot = fofx(t,y)

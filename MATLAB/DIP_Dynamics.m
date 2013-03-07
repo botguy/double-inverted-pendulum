@@ -68,18 +68,20 @@ l11 = .5;
 l1t = 0;
 l0 = 1;
 l2 = 1;
-m1 = .25;
-m2 = .25;
-mw = .5;
+m1 = .1;
+m2 = .1;
+mw = .1;
 r = (58e-3)/2;
-J1 = m1*r^2/2;
-J2 = m2*.5^2;
+J1 = m1*l0^2; %Fix
+J2 = m2*l2^2; %Fix
 Jw = mw*r^2/2;
 tau = 10;
 
 % Substitute values into the matrices
 A = double(subs(Asymb))
 B = double(subs(Bsymb))
+ctrb(A,B)
+rank(ctrb(A,B))
 
 Q = eye(6);
 R = 1;
