@@ -8,14 +8,13 @@
 #include <DataLog.h>
 #include <RcControl.h>
 
+SingleInvertedPD pd;
 
 void setup() 
 { 
   Serial.begin(9600);
   startDataLogging();
 //  setupBlueToothConnection();  
-  
-  SingleInvertedPD pd;
   SetControlLoop( (ControlLoop*)(&pd) );
 } 
 
