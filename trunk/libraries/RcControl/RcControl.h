@@ -19,6 +19,7 @@
 #define RIGHT			'd'
 
 #define UPLOAD_TUNING	't'
+#define GET_CTRL_LOOP_INFO	'i'
 
 void RcControl( Stream* stream );
 

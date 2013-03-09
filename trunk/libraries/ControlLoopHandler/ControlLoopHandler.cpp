@@ -97,7 +97,10 @@ void setTurn(int16_t newTurn)
 
 void parseTuning( Stream* stream )
 {
-	Serial.println("handler parsing");
-	
 	cLoop->parseTuning( stream );
+}
+
+void getCtrlLoopInfo( Stream* stream )
+{
+	cLoop->getInfo( stream );
 }

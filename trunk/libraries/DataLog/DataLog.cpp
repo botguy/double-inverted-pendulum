@@ -45,6 +45,8 @@ void printDataLog(Stream* outStream)
 	
 	stopDataLogging(0);
 	
+	outStream->print("\n");
+	
 	do
 	{
 		outStream->print(buffer[j]);

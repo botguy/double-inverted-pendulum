@@ -35,8 +35,6 @@ void SingleInvertedPD::parseTuning( Stream* stream )
 {
 	int16_t k,b;
 
-	Serial.println("PD parsing");
-	
 	// read tunings
 	k = (int16_t)stream->parseInt();
 	b = (int16_t)stream->parseInt();
@@ -45,12 +43,19 @@ void SingleInvertedPD::parseTuning( Stream* stream )
 	// calculate gains
 	gCur = k + b;
 	gPrev = -b;
-	
-	// print gains
+
+	this->getInfo( stream );
+}
+
+void SingleInvertedPD::getInfo( Stream* stream )
+{
+	stream->println("\nDigital PD control Loop");
+	stream->print("b1 = ");
 	stream->print(gCur);
-	stream->print(' ');
-	stream->print(gPrev);
-	stream->print(' ');
+	stream->print("\t\tb2 = ");
+	stream->println(gPrev);
+	
+	stream->print("a1 = 2^");
 	stream->print(rShift);
-	stream->print('\n');	
+	stream->println("\ta2 = 0");		
 }
