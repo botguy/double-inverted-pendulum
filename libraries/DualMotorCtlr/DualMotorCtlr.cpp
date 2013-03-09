@@ -16,7 +16,6 @@ void DualMotorInit(void)
   pinMode(bPWM  , OUTPUT);
 }
 
-//
 void DualMotorControl(int16_t sped, int16_t turn)
 {
   int16_t right, left;
@@ -25,14 +24,14 @@ void DualMotorControl(int16_t sped, int16_t turn)
   left  = sped - turn;
   
   digitalWrite(a1, right >  0);
-  digitalWrite(a2, right <= 0);  
+  digitalWrite(a2, right <= 0);
   right = abs(right);
-  right = min(right, 255);
-  analogWrite(aPWM, right); 
+  right = min(right, PWM_MAX);
+  analogWrite(aPWM, (right & PWM_MAX));
   
   digitalWrite(b1, left >  0);
   digitalWrite(b2, left <= 0);  
   left = abs(left);
-  left = min(left, 255);
-  analogWrite(bPWM, left); 
+  left = min(left, PWM_MAX);
+  analogWrite(bPWM, (left & PWM_MAX)); 
 }
