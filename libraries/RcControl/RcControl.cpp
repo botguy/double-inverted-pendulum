@@ -40,10 +40,13 @@ void RcControl( Stream* stream )
 				break;
 			
 			case UPLOAD_TUNING:
-				Serial.println("rccontrol parsing");
 				parseTuning( stream );
 				break;
 				
+			case GET_CTRL_LOOP_INFO:
+				getCtrlLoopInfo( stream );
+				break;
+
 			default:
 				break;
 		}

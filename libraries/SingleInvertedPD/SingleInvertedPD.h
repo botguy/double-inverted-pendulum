@@ -16,6 +16,8 @@ class SingleInvertedPD : public ControlLoop
 	
 	virtual void parseTuning( Stream* stream );
 	
+	virtual void getInfo( Stream* stream );
+	
   private:
 	int16_t gCur;
 	int16_t gPrev;
