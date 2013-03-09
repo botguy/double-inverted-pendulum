@@ -14,12 +14,12 @@ void setup()
 { 
   Serial.begin(9600);
   startDataLogging();
-  setupBlueToothConnection();  
+  setupBlueToothConnection();
   SetControlLoop( (ControlLoop*)(&pd) );
-} 
+}
 
 void loop()
 {
   RcControl(&blueToothSerial);
-  RcControl(&Serial);
+ //RcControl(&Serial);
 }

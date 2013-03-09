@@ -14,6 +14,8 @@
 #define   a2    12
 #define   aPWM  10
 
+#define PWM_MAX	0x00FF
+
 void DualMotorInit(void);
 
 
