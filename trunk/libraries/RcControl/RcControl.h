@@ -10,6 +10,7 @@
 
 // Commands:
 #define EMERGENCY_STOP	' '
+#define RESUME_FROM_EMERGENCY_STOP 'g'
 #define	PRINT_DATA_LOG  'p'
 
 #define FORWARD			'w'
@@ -20,6 +21,13 @@
 
 #define UPLOAD_TUNING	't'
 #define GET_CTRL_LOOP_INFO	'i'
+
+#define INCREMENT_BOTTOM_SETPOINT 	'y'
+#define DECREMENT_BOTTOM_SETPOINT 	'h'
+
+#define INCREMENT_TOP_SETPOINT 		'u'
+#define DECREMENT_TOP_SETPOINT 		'j'
+
 
 void RcControl( Stream* stream );
 

@@ -4,9 +4,9 @@
 //constructor
 SingleInvertedPD::SingleInvertedPD(void)
 {
-	gCur = 0;
-	gPrev = 0;
-	rShift = 0;
+	gCur = G_CUR_INIT;
+	gPrev = G_PREV_INT;
+	rShift = R_SHIFT_INIT;
 	prevBottomAngle = 0;
 	control = 0;
 }

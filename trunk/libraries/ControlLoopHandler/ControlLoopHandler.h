@@ -6,8 +6,11 @@
 #define BOTTOM_POT_PIN	0
 #define TOP_POT_PIN		1
 
-#define BOTTOM_POT_OFFSET	519
-#define TOP_POT_OFFSET		256
+extern uint16_t BottomPotSetpoint;
+extern uint16_t TopPotSetpoint;
+
+#define BOTTOM_POT_SETPOINT_INIT	524
+#define TOP_POT_SETPOINT_INIT		256
 
 // Uses timer2(8 bit) for control loop interrupt
 // Timer1 is used for PWM (pins 9 and 10)
@@ -24,5 +27,6 @@ void parseTuning( Stream* steam);
 void getCtrlLoopInfo( Stream* stream );
 
 void EmergencyStop(void);
+void ResumeFromEmergencyStop(void);
 
 #endif // ControlLoopHandler_h
