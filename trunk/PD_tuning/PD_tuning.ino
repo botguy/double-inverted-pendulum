@@ -15,7 +15,7 @@ void setup()
   Serial.begin(9600);
   startDataLogging();
   setupBlueToothConnection();
-  SetControlLoop( (ControlLoop*)(&pd) );
+  SetControlLoop( &pd );
 }
 
 void loop()
