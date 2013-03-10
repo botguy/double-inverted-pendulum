@@ -10,6 +10,9 @@ ControlLoop* cLoop;
 int16_t sped;
 int16_t turn;
 
+uint16_t BottomPotSetpoint 	= BOTTOM_POT_SETPOINT_INIT;
+uint16_t TopPotSetpoint 	= TOP_POT_SETPOINT_INIT;
+
 void SetControlLoop(ControlLoop* ctrlLoop)
 {
 	noInterrupts(); // disable interrupts
@@ -53,8 +56,8 @@ ISR(TIMER2_COMPA_vect)
 	int16_t control;
 	
 	// Read sensors
-	bottomAngle = (int16_t)analogRead(BOTTOM_POT_PIN) - BOTTOM_POT_OFFSET;
-	topAngle = (int16_t)analogRead(TOP_POT_PIN) - TOP_POT_OFFSET;
+	bottomAngle = (int16_t)analogRead(BOTTOM_POT_PIN) - BottomPotSetpoint;
+	topAngle = (int16_t)analogRead(TOP_POT_PIN) - TopPotSetpoint;
 	
 	// Call control cLoop
 	control = cLoop->postSample(bottomAngle, topAngle);
@@ -79,6 +82,12 @@ void EmergencyStop(void)
 
 	// set motor output to zero
 	DualMotorControl(0,0);
+}
+
+void ResumeFromEmergencyStop(void)
+{
+	//turn back on interrupts
+	interrupts();
 }
 
 void setSped(int16_t newSped)

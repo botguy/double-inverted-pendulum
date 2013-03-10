@@ -3,6 +3,11 @@
 
 #include <ControlLoop.h>
 
+// Initial Gains
+#define G_CUR_INIT	   (59)
+#define	G_PREV_INT	   (-9)
+#define R_SHIFT_INIT	(0)
+
 class SingleInvertedPD : public ControlLoop
 {
   public:
