@@ -3,19 +3,19 @@
 #include <Bluetooth.h>
 #include <ControlLoopHandler.h>
 #include <ControlLoop.h>
-#include <SingleInvertedPD.h>
+#include <SingleInvertedDZ1.h>
 #include <DualMotorCtlr.h>
 #include <DataLog.h>
 #include <RcControl.h>
 
-SingleInvertedPD pd;
+SingleInvertedDZ1 dz1;
 
 void setup() 
 { 
   Serial.begin(9600);
   startDataLogging();
   setupBlueToothConnection();
-  SetControlLoop( &pd );
+  SetControlLoop( &dz1 );
 }
 
 void loop()

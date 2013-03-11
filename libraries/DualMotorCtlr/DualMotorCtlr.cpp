@@ -45,13 +45,13 @@ void DualMotorControl(int16_t sped, int16_t turn)
 
 static void setupPWM(void)
 {
-  // Setup Timer1 for 10bit Phase correct PWM
-  // PWM freq = (16e6)/(prescaler * 2 * 2^10) = 7.8kHz
+  // Setup Timer1 for 10bit Fast PWM
+  // PWM freq = (16e6)/(prescaler * 2^10) = 15.6kHz
 
   // Set CS1[2:0] = 001 for 1:1 prescaler
-  TCCR1B = b(CS10);
+  TCCR1B = b(CS10) | b(WGM12);
   
-  // Set WGM1[2:0] = 011 for 10 bit Phase correct PWM
+  // Set WGM1[2:0] = 111 for 10 bit Fast PWM
   // turn on PWM on Pins 9 & 10
   TCCR1A = b(COM1A1) | b(COM1B1) | b(WGM11) | b(WGM10);
 }
