@@ -4,7 +4,7 @@
 #include <ControlLoop.h>
 
 #define BOTTOM_POT_PIN	0
-#define TOP_POT_PIN		1
+#define TOP_POT_PIN		2
 
 extern uint16_t BottomPotSetpoint;
 extern uint16_t TopPotSetpoint;

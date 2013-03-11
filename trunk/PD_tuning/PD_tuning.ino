@@ -3,12 +3,12 @@
 #include <Bluetooth.h>
 #include <ControlLoopHandler.h>
 #include <ControlLoop.h>
-#include <SingleInvertedDZ1.h>
+#include <DoubleInvertedDZ1.h>
 #include <DualMotorCtlr.h>
 #include <DataLog.h>
 #include <RcControl.h>
 
-SingleInvertedDZ1 dz1;
+DoubleInvertedDZ1 dz1;
 
 void setup() 
 { 
