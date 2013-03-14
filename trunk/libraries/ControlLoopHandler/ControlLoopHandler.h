@@ -9,8 +9,8 @@
 extern uint16_t BottomPotSetpoint;
 extern uint16_t TopPotSetpoint;
 
-#define BOTTOM_POT_SETPOINT_INIT	523
-#define TOP_POT_SETPOINT_INIT		256
+#define BOTTOM_POT_SETPOINT_INIT	298
+#define TOP_POT_SETPOINT_INIT		287
 
 // Uses timer2(8 bit) for control loop interrupt
 // Timer1 is used for PWM (pins 9 and 10)

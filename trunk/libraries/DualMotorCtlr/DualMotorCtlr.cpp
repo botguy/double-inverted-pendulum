@@ -20,12 +20,12 @@ void DualMotorInit(void)
   pinMode(bPwmPin  , OUTPUT);
 }
 
-void DualMotorControl(int16_t sped, int16_t turn)
+void DualMotorControl(int16_t forward, int16_t turn)
 {
   int16_t right, left;
   
-  right = sped + turn;
-  left  = sped - turn;
+  right = forward + turn;
+  left  = forward - turn;
   
   digitalWrite(a1, right >  0);
   digitalWrite(a2, right <= 0);

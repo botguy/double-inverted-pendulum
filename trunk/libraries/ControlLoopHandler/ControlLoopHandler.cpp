@@ -6,9 +6,9 @@
 
 static void setupTimer2(void);
 
-ControlLoop* cLoop;
-int16_t sped;
-int16_t turn;
+static ControlLoop* cLoop;
+static int16_t sped;
+static int16_t turn;
 
 uint16_t BottomPotSetpoint 	= BOTTOM_POT_SETPOINT_INIT;
 uint16_t TopPotSetpoint 	= TOP_POT_SETPOINT_INIT;
@@ -26,6 +26,9 @@ void SetControlLoop(ControlLoop* ctrlLoop)
 	interrupts(); // enabled interrupts
 }
 
+#define DisableTimerInt()	(TIMSK2 &= ~(1 << OCIE2A))
+#define EnableTimerInt()	(TIMSK2 |= (1 << OCIE2A))
+
 // Target sampling rate: 500Hz
 // Clock prescaler set to 128 -> 62.5kHz timer2 clock based on 16Mhz system clock
 // For 128 prescaler, set CS22:CS20 = 101 according to table 18-9 in Atmel ATmega328p datasheet
@@ -33,6 +36,7 @@ void SetControlLoop(ControlLoop* ctrlLoop)
 // interrupt register set to 249 since it starts from zero.
 static void setupTimer2(void)
 {
+	DisableTimerInt();
 	//set timer2 interrupt at 62.5kHz
 	TCCR2A = 0;// set entire TCCR2A register to 0
 	TCCR2B = 0;// same for TCCR2B
@@ -45,7 +49,7 @@ static void setupTimer2(void)
 	// Set CS12 bit for 256 prescaler
 	TCCR2B |= ((1 << CS22) | (1 << CS20));
 	// enable timer compare interrupt
-	TIMSK2 |= (1 << OCIE2A);
+	EnableTimerInt();
 }
 
 // 500Hz ISR
@@ -77,8 +81,10 @@ ISR(TIMER2_COMPA_vect)
 
 void EmergencyStop(void)
 {
-	//turn off interrupts
+	//turn off timer interrupt
 	noInterrupts();
+	DisableTimerInt();
+	interrupts();
 
 	// set motor output to zero
 	DualMotorControl(0,0);
@@ -86,7 +92,9 @@ void EmergencyStop(void)
 
 void ResumeFromEmergencyStop(void)
 {
-	//turn back on interrupts
+	//turn on timer interrupt
+	noInterrupts();
+	EnableTimerInt();
 	interrupts();
 }
 

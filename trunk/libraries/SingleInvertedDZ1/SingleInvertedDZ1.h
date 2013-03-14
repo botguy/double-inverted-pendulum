@@ -4,12 +4,18 @@
 #include <ControlLoop.h>
 
 // Initial Gains
-#define B1_INIT		   	(530)
-#define	B2_INIT	  		(-130)
-#define A2_INIT			(4)
+#define B1_INIT		   	(550)
+#define	B2_INIT	  		(-150)
+#define A2_INIT			(3)
+#define R_SHIFT_INIT	(2)
+#define CONTROL_SHIFT	(4)
+/*
+#define B1_INIT		   	(0)
+#define	B2_INIT	  		(0)
+#define A2_INIT			(0)
 #define R_SHIFT_INIT	(3)
 #define CONTROL_SHIFT	(4)
-
+*/
 class SingleInvertedDZ1 : public ControlLoop
 {
   public:
