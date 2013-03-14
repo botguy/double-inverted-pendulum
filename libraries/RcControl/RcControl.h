@@ -5,8 +5,8 @@
 // Run in the background task
 
 // Tunings
-#define SPEED_MAGNITUDE	50
-#define	TURN_MAGNITUDE	20
+#define SPEED_MAGNITUDE	200
+#define	TURN_MAGNITUDE	150
 
 // Commands:
 #define EMERGENCY_STOP	' '
@@ -30,7 +30,5 @@
 
 
 void RcControl( Stream* stream );
-
-
 
 #endif // RcControl_h

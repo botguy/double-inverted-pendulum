@@ -23,7 +23,7 @@
 void DualMotorInit(void);
 
 
-// sped and turn between [-255, 255]
-void DualMotorControl(int16_t sped, int16_t turn);
+// forward and turn between [-255, 255]
+void DualMotorControl(int16_t forward, int16_t turn);
 
 #endif // DualMotorCtlr_h
