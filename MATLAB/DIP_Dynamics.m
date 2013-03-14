@@ -61,6 +61,11 @@ phiD = 0;
 x = 0;
 theta = pi/2;
 phi = 0;
+
+% Asymb, Bsymb evaluated at equilibrium state
+Asymb_lin = subs(Asymb)
+Bsymb_lin = subs(Asymb)
+
 % System parameters
 g = 9.8;
 l11 = .5;
@@ -76,12 +81,15 @@ J2 = m2*l2^2; %Fix
 Jw = mw*r^2/2;
 tau = 20;
 
-% Substitute values into the matrices
-A = double(subs(Asymb))
-B = double(subs(Bsymb))
-c=ctrb(A,B)
-rank(c)
+% Substitute sys parameters into the matrices
+A = double(subs(Asymb));
+B = double(subs(Bsymb));
 
+% Check controllability
+controllability_AB=ctrb(A,B);
+rank_controllability_AB = rank(controllability_AB);
+
+% Define Q,R for LQR problem
 Q = 5*eye(6);
 R = 1;
 
