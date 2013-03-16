@@ -34,9 +34,9 @@ rm1Dsq = rm1D' * rm1D;
 rm2Dsq = rm2D' * rm2D;
 
 % Kinetic and Potential Energy
-T = (1/2) * (  mw*rwDsq + Jw*(xD^2/(r^2)) ...
-            +  m1*rm1Dsq + J1*(thetaD^2) ...
-            +  m2*rm2Dsq + J2*((thetaD + phiD)^2));
+T = (1/2) * (  mw*rwDsq + Jw*(rwDsq/(r^2)) ...
+            +  m1*rwDsq + J1*(thetaD^2) ...
+            +  m2*rpDsq + J2*((thetaD + phiD)^2));
 
 V = g*(m1*rm1'*ey + m2*rm2'*ey);
 
@@ -64,7 +64,7 @@ phi = 0;
 
 % Asymb, Bsymb evaluated at equilibrium state
 Asymb_lin = subs(Asymb)
-Bsymb_lin = subs(Bsymb)
+Bsymb_lin = subs(Asymb)
 
 % System parameters
 g = 9.8;
@@ -76,7 +76,7 @@ m1 = .1;
 m2 = .1;
 mw = 1;
 r = .1;
-J1 = m1*l0^2; %Fix
+J1 = m1*l0^2 + m1*(l11^2 + l1t^2); %Fix ; parallel axis 
 J2 =  1/3 * m2 * (2*l2)^2; % Slender Rod assumption, Inertia taken about pivot
 Jw = mw*r^2/2;
 tau = 20;
