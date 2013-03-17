@@ -6,7 +6,8 @@
 function qdd = DIP_nonlinearModel()
     syms x theta phi xD thetaD phiD real % coordinates
     syms r l11 l1t l0 l2 real % physical dimensions
-    syms m1 m2 mw J1 J2 Jw tau g real % physical parameters
+    syms m1 m2 mw J1 J2 Jw v g real % physical parameters
+    syms kt R % DC motor parameters
 
     q  = [x, theta, phi]';
     qD = [xD, thetaD, phiD]';
@@ -28,12 +29,12 @@ function qdd = DIP_nonlinearModel()
 
     % Velocity Definitions
     rwD  = jacobian(rw,  q)*qD;
-    rpD  = jacobian(rp,  q)*qD;
+    %rpD  = jacobian(rp,  q)*qD;
     rm1D = jacobian(rm1, q)*qD;
     rm2D = jacobian(rm2, q)*qD;
 
     rwDsq  = rwD'  * rwD;
-    rpDsq  = rpD'  * rpD;
+   % rpDsq  = rpD'  * rpD;
     rm1Dsq = rm1D' * rm1D;
     rm2Dsq = rm2D' * rm2D;
 
@@ -50,5 +51,6 @@ function qdd = DIP_nonlinearModel()
     Mdqd = simplify( jacobian(Mqd,q)*qD); %constraint forces
     dTdq = simplify(jacobian(T,q)');
     dVdq = simplify(jacobian(V,q)');
-    qdd = simplify(inv(M)*([1/r; 1; 0]*tau -Mdqd + dTdq - dVdq));
+    dW = kt/R * (v*[1/r; 1; 0] - [xD/r; thetaD; 0]*kt); % virtual work from motors;
+    qdd = simplify(inv(M)*(dW -Mdqd + dTdq - dVdq));
 end

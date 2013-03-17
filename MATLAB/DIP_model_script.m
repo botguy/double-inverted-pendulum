@@ -10,7 +10,7 @@ qdd_real = DIP_nonlinearReal(qdd_simplified);
 %find linearized model
 theta = 0;
 phi = 0;
-[Asym,Bsym] = DIP_linearizeSym(qdd, theta, phi);
+[Asym,Bsym] = DIP_linearizeSym(qdd_simplified, theta, phi);
 [Areal,Breal] = DIP_linearizeReal(Asym, Bsym);
 
 % calculate LQR gains

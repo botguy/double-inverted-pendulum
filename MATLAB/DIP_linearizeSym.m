@@ -1,7 +1,8 @@
 function [Asym,Bsym] = DIP_linearizeSym(qdd, thetaIn, phiIn)
     syms x theta phi xD thetaD phiD real % coordinates
     syms r l11 l1t l0 l2 real % physical dimensions
-    syms m1 m2 mw J1 J2 Jw tau g real % physical parameters
+    syms m1 m2 mw J1 J2 Jw v g real % physical parameters
+    syms kt R % DC motor parameters
 
     
     % Define state vectors and matrices
@@ -17,5 +18,5 @@ function [Asym,Bsym] = DIP_linearizeSym(qdd, thetaIn, phiIn)
     phi = phiIn;
 
     Asym = simplify(subs(jacobian(yd, y)));
-    Bsym = simplify(subs(jacobian(yd, tau)));
+    Bsym = simplify(subs(jacobian(yd, v)));
 end

@@ -8,5 +8,8 @@ function qdd_simplified = DIP_applyAssumptions(qdd)
     % apply Slender Rod assumption to the top link.
     qdd_simplified = subs(qdd_simplified, J2, 1/3 * m2 * (2*l2)^2);
     
+    % apply solid disk assumption to wheels
+    qdd_simplified = subs(qdd_simplified, Jw, 1/2* mw * r^2);
+    
     qdd_simplified = simplify(qdd_simplified);
 end
