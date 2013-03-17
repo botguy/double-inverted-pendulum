@@ -1,21 +1,26 @@
-#ifndef DoubleInvertedDZ1_h
-#define DoubleInvertedDZ1_h
+#ifndef SingleInvertedFullState_h
+#define SingleInvertedFullState_h
 
 #include <ControlLoop.h>
 
 // Initial Gains
-#define B1_THETA_INIT	(550)
-#define	B2_THETA_INIT	(-150)
-#define B1_PHI_INIT		(0)
-#define	B2_PHI_INIT		(0)
+#define B1_INIT		   	(550)
+#define	B2_INIT	  		(-150)
 #define A2_INIT			(3)
+#define SPEED_FB_INIT	(2)
 #define R_SHIFT_INIT	(2)
 #define CONTROL_SHIFT	(4)
-
-class DoubleInvertedDZ1 : public ControlLoop
+/*
+#define B1_INIT		   	(0)
+#define	B2_INIT	  		(0)
+#define A2_INIT			(0)
+#define R_SHIFT_INIT	(3)
+#define CONTROL_SHIFT	(4)
+*/
+class SingleInvertedFullState : public ControlLoop
 {
   public:
-    DoubleInvertedDZ1(void);
+    SingleInvertedFullState(void);
 	
 	// preSample: called during the previous sample, after control output is finished, to prepare for next sample
     virtual void preSample();
@@ -28,16 +33,14 @@ class DoubleInvertedDZ1 : public ControlLoop
 	virtual void getInfo( Stream* stream );
 	
   private:
-	int16_t b1_theta;
-	int16_t b2_theta;
-	int16_t b1_phi;
-	int16_t b2_phi;
+	int16_t b1;
+	int16_t b2;
 	int16_t a2;
+	int16_t speedFB;
 	uint8_t rShift;
 	
 	int16_t prevBottomAngle;
-	int16_t prevTopAngle;
 	int16_t control;
 };
 
-#endif // DoubleInvertedDZ1_h
+#endif // SingleInvertedFullState_h

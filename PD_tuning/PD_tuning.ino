@@ -3,15 +3,16 @@
 #include <Bluetooth.h>
 #include <ControlLoopHandler.h>
 #include <ControlLoop.h>
-#include <SingleInvertedDZ1.h>
+#include <SingleInvertedFullState.h>
 #include <DualMotorCtlr.h>
 #include <DataLog.h>
 #include <RcControl.h>
 
-SingleInvertedDZ1 dz1;
+SingleInvertedFullState dz1;
 
 void setup() 
 { 
+  delay(100);
   Serial.begin(9600);
   Serial.println("Reset");
   startDataLogging();
