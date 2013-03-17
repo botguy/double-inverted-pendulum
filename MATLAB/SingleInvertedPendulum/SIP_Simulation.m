@@ -1,8 +1,8 @@
-function SIP_Simulation(K)
-    x0 = 0;
-    xD0 = 1;
-    theta0 = .5;
-    thetaD0 = 1;
+function SIP_Simulation(K, x0_in, xD0_in, theta0_in, thetaD0_in)
+    x0 = x0_in;
+    xD0 = xD0_in;
+    theta0 = theta0_in;
+    thetaD0 = thetaD0_in;
 
     % Set up values for ode23
     t0 = 0;
