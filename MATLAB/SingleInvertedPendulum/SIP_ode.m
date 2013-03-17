@@ -1,0 +1,11 @@
+function ydot = SIP_ode(t,y,K)
+x = y(1);
+xD = y(2);
+theta = y(3);
+thetaD = y(4);
+v = -K*[xD; theta; thetaD];
+ydot(1) = xD;
+ydot(2) = 1/290*(-40000*v+40000*xD+1160*sin(theta)*thetaD^2-2900*cos(theta)*v+2900*cos(theta)*thetaD-28449*cos(theta)*sin(theta))/(-23+10*cos(theta)^2);
+ydot(3) = thetaD;
+ydot(4) = 1/1160*(-400000*cos(theta)*v+400000*cos(theta)*xD+11600*cos(theta)*sin(theta)*thetaD^2-66700*v+66700*thetaD-654327*sin(theta))/(-23+10*cos(theta)^2);
+ydot = ydot(:);
