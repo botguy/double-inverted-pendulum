@@ -17,8 +17,8 @@ Ts = 1/500; %500 Hz sampling rate
 Q = eye(3);
 R = 1;
 Qn = 10*eye(3); %model is noisy since it is a linearize version of nonlinear model.
-Rn = 1; %sensors have very little noise. Only quantization noise.
-K = lqrGains(Areal, Breal, Ts, Q, R, Qn, Rn);
+Rn = eye(2); %sensors have very little noise. Only quantization noise.
+[K, est, lqg, ctlr]  = lqrGains(Areal, Breal, Ts, Q, R, Qn, Rn);
 
 % simulate
 x0 = 0;
